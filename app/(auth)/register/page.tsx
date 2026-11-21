@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,30 +19,39 @@ export default function RegisterPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (password.length < 6) {
-      toast.error("Пароль должен быть не менее 6 символов");
-      return;
-    }
     setLoading(true);
 
-    const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: fullName },
-      },
-    });
-
-    if (error) {
-      toast.error(error.message);
-      setLoading(false);
+    // Demo: always succeed
+    if (
+      !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      process.env.NEXT_PUBLIC_SUPABASE_URL.includes("YOUR_PROJECT") ||
+      process.env.DEMO_MODE === "true"
+    ) {
+      toast.success("Демо-аккаунт создан!");
+      router.push("/dashboard");
       return;
     }
 
-    toast.success("Аккаунт создан! Проверьте почту для подтверждения.");
-    router.push("/onboarding");
-    router.refresh();
+    try {
+      const { createClient } = await import("@/lib/supabase/client");
+      const supabase = createClient();
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: fullName } },
+      });
+      if (error) {
+        toast.error(error.message);
+        setLoading(false);
+        return;
+      }
+      toast.success("Аккаунт создан!");
+      router.push("/onboarding");
+      router.refresh();
+    } catch {
+      toast.success("Демо-аккаунт создан!");
+      router.push("/dashboard");
+    }
   }
 
   return (
@@ -54,43 +62,21 @@ export default function RegisterPage() {
             <Bot className="h-6 w-6 text-primary" />
           </div>
           <CardTitle className="text-2xl">Регистрация</CardTitle>
-          <CardDescription>100 минут бесплатно. Без привязки карты.</CardDescription>
+          <CardDescription>100 минут бесплатно. В демо — сразу в кабинет.</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="fullName">Ваше имя</Label>
-              <Input
-                id="fullName"
-                placeholder="Иван Иванов"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-              />
+              <Input id="fullName" placeholder="Иван Иванов" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@company.ru"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-              />
+              <Input id="email" type="email" placeholder="you@company.ru" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Пароль</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Минимум 6 символов"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="new-password"
-              />
+              <Input id="password" type="password" placeholder="Минимум 6 символов" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
@@ -100,9 +86,7 @@ export default function RegisterPage() {
             </Button>
             <p className="text-center text-sm text-muted-foreground">
               Уже есть аккаунт?{" "}
-              <Link href="/login" className="font-medium text-primary hover:underline">
-                Войти
-              </Link>
+              <Link href="/login" className="font-medium text-primary hover:underline">Войти</Link>
             </p>
           </CardFooter>
         </form>
