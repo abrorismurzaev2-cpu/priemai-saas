@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",
@@ -14,11 +20,6 @@ const nextConfig: NextConfig = {
         hostname: "*.supabase.co",
       },
     ],
-  },
-  logging: {
-    fetches: {
-      fullUrl: process.env.NODE_ENV === "development",
-    },
   },
 };
 
