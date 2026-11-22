@@ -8,6 +8,13 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0a0a0a",
+};
+
 export const metadata: Metadata = {
   title: "ПриёмAI — умный голосовой ресепшнист",
   description:

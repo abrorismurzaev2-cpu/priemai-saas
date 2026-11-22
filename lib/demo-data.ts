@@ -239,3 +239,85 @@ export const demoAppointments = [
     created_at: new Date().toISOString(),
   },
 ];
+
+export const demoServices = [
+  { id: "svc1", name: "Женская стрижка", category: "Волосы", price: 2500, duration_min: 60, master_ids: ["m1", "m2"] },
+  { id: "svc2", name: "Мужская стрижка", category: "Волосы", price: 1500, duration_min: 40, master_ids: ["m1"] },
+  { id: "svc3", name: "Окрашивание", category: "Волосы", price: 5500, duration_min: 120, master_ids: ["m2"] },
+  { id: "svc4", name: "Маникюр классический", category: "Ногти", price: 1800, duration_min: 60, master_ids: ["m3"] },
+  { id: "svc5", name: "Маникюр + гель-лак", category: "Ногти", price: 2800, duration_min: 90, master_ids: ["m3"] },
+  { id: "svc6", name: "Педикюр", category: "Ногти", price: 3200, duration_min: 75, master_ids: ["m3"] },
+  { id: "svc7", name: "Укладка", category: "Волосы", price: 2000, duration_min: 45, master_ids: ["m1", "m2"] },
+  { id: "svc8", name: "Брови (коррекция + окрашивание)", category: "Брови", price: 1200, duration_min: 30, master_ids: ["m3"] },
+];
+
+export const demoMasters = [
+  {
+    id: "m1",
+    name: "Анна Ковалёва",
+    role: "Стилист-парикмахер",
+    phone: "+79001112233",
+    experience_years: 8,
+    services: ["Женская стрижка", "Мужская стрижка", "Укладка"],
+    schedule: "Пн–Пт 10:00–19:00",
+    active: true,
+  },
+  {
+    id: "m2",
+    name: "Мария Соколова",
+    role: "Колорист",
+    phone: "+79004445566",
+    experience_years: 6,
+    services: ["Женская стрижка", "Окрашивание", "Укладка"],
+    schedule: "Вт–Сб 11:00–20:00",
+    active: true,
+  },
+  {
+    id: "m3",
+    name: "Елена Морозова",
+    role: "Мастер маникюра",
+    phone: "+79007778899",
+    experience_years: 5,
+    services: ["Маникюр классический", "Маникюр + гель-лак", "Педикюр", "Брови"],
+    schedule: "Пн–Сб 10:00–18:00",
+    active: true,
+  },
+];
+
+export const demoAnalytics = {
+  period: "30 дней",
+  totalCalls: 86,
+  answeredCalls: 79,
+  missedCalls: 7,
+  totalMinutes: 312,
+  appointmentsCreated: 41,
+  conversionRate: 48,
+  avgCallDuration: 3.6,
+  revenueEstimate: 118500,
+  callsByDay: [
+    { day: "Пн", calls: 14, appointments: 7 },
+    { day: "Вт", calls: 11, appointments: 5 },
+    { day: "Ср", calls: 16, appointments: 9 },
+    { day: "Чт", calls: 13, appointments: 6 },
+    { day: "Пт", calls: 18, appointments: 8 },
+    { day: "Сб", calls: 10, appointments: 5 },
+    { day: "Вс", calls: 4, appointments: 1 },
+  ],
+  topServices: [
+    { name: "Маникюр + гель-лак", count: 14 },
+    { name: "Женская стрижка", count: 11 },
+    { name: "Окрашивание", count: 7 },
+    { name: "Педикюр", count: 5 },
+    { name: "Укладка", count: 4 },
+  ],
+  peakHours: [
+    { hour: "10:00", calls: 8 },
+    { hour: "11:00", calls: 12 },
+    { hour: "12:00", calls: 9 },
+    { hour: "14:00", calls: 11 },
+    { hour: "15:00", calls: 15 },
+    { hour: "16:00", calls: 13 },
+    { hour: "17:00", calls: 10 },
+    { hour: "18:00", calls: 8 },
+  ],
+};

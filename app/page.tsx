@@ -85,31 +85,31 @@ export default function LandingPage() {
               Тарифы
             </a>
           </nav>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" asChild>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex" asChild>
               <Link href="/login">Войти</Link>
             </Button>
-            <Button asChild>
-              <Link href="/register">Начать бесплатно</Link>
+            <Button size="sm" asChild>
+              <Link href="/register">Начать</Link>
             </Button>
           </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="container mx-auto px-4 py-20 text-center md:py-32">
+      <section className="container mx-auto px-4 py-12 text-center sm:py-20 md:py-28">
         <div className="mx-auto max-w-3xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-muted/50 px-4 py-1.5 text-sm">
             <Zap className="h-4 w-4 text-primary" />
             100 минут бесплатно при регистрации
           </div>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
+          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
             Умный голосовой{" "}
             <span className="text-primary">AI-ресепшнист</span>
             <br />
             для вашего бизнеса
           </h1>
-          <p className="mb-8 text-lg text-muted-foreground md:text-xl">
+          <p className="mb-6 text-base text-muted-foreground sm:mb-8 sm:text-lg md:text-xl">
             Принимает звонки 24/7, записывает клиентов в календарь, отвечает на вопросы
             и переводит сложные разговоры живому сотруднику. На русском языке.
           </p>
@@ -220,7 +220,12 @@ export default function LandingPage() {
             <Bot className="h-5 w-5 text-primary" />
             <span className="font-semibold">ПриёмAI</span>
           </div>
-          <p className="text-sm text-muted-foreground">© 2026 ПриёмAI. Все права защищены.</p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+            <Link href="/privacy" className="hover:text-foreground">Конфиденциальность</Link>
+            <Link href="/terms" className="hover:text-foreground">Соглашение</Link>
+            <Link href="/offer" className="hover:text-foreground">Оферта</Link>
+          </nav>
+          <p className="text-sm text-muted-foreground">© 2026 ПриёмAI</p>
         </div>
       </footer>
     </div>
