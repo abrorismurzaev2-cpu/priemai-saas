@@ -11,14 +11,13 @@ import {
   CreditCard,
   Settings,
   LogOut,
-  Bot,
   Menu,
   X,
   Store,
   BarChart3,
-  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BrandLogo } from "@/components/brand-logo";
 
 const nav = [
   { href: "/dashboard", label: "Обзор", icon: LayoutDashboard },
@@ -42,7 +41,7 @@ export function Sidebar() {
       const supabase = createClient();
       await supabase.auth.signOut();
     } catch {
-      /* demo mode */
+      /* demo */
     }
     router.push("/login");
     router.refresh();
@@ -89,12 +88,8 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile top bar */}
       <div className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b bg-card px-4 md:hidden">
-        <div className="flex items-center gap-2">
-          <Bot className="h-6 w-6 text-primary" />
-          <span className="font-bold">ПриёмAI</span>
-        </div>
+        <BrandLogo size="sm" />
         <button
           type="button"
           aria-label={open ? "Закрыть меню" : "Открыть меню"}
@@ -105,7 +100,6 @@ export function Sidebar() {
         </button>
       </div>
 
-      {/* Mobile overlay */}
       {open && (
         <div
           className="fixed inset-0 z-40 bg-black/50 md:hidden"
@@ -113,25 +107,21 @@ export function Sidebar() {
         />
       )}
 
-      {/* Mobile drawer */}
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r bg-card transition-transform duration-200 md:hidden",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-14 items-center gap-2 border-b px-4">
-          <Bot className="h-6 w-6 text-primary" />
-          <span className="font-bold">ПриёмAI</span>
+        <div className="flex h-14 items-center border-b px-4">
+          <BrandLogo size="sm" />
         </div>
         <NavLinks onNavigate={() => setOpen(false)} />
       </aside>
 
-      {/* Desktop sidebar */}
       <aside className="hidden h-screen w-64 shrink-0 flex-col border-r bg-card md:flex">
-        <div className="flex h-16 items-center gap-2 border-b px-6">
-          <Bot className="h-7 w-7 text-primary" />
-          <span className="text-lg font-bold tracking-tight">ПриёмAI</span>
+        <div className="flex h-16 items-center border-b px-6">
+          <BrandLogo size="lg" />
         </div>
         <NavLinks />
       </aside>

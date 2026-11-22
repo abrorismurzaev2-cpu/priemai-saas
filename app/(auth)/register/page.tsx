@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { BrandLogo } from "@/components/brand-logo";
 import { toast } from "sonner";
 
 export default function RegisterPage() {
@@ -58,8 +59,8 @@ export default function RegisterPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            <Bot className="h-6 w-6 text-primary" />
+          <div className="mx-auto mb-3">
+            <BrandLogo size="lg" className="justify-center" />
           </div>
           <CardTitle className="text-2xl">Регистрация</CardTitle>
           <CardDescription>100 минут бесплатно. В демо — сразу в кабинет.</CardDescription>

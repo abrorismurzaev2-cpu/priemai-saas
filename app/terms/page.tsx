@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bot } from "lucide-react";
+import { BrandLogo } from "@/components/brand-logo";
 
 export const metadata = {
   title: "Пользовательское соглашение — ПриёмAI",
@@ -10,9 +10,8 @@ export default function TermsPage() {
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="mx-auto flex h-14 max-w-3xl items-center gap-2 px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <Bot className="h-6 w-6 text-primary" />
-            <span className="font-bold">ПриёмAI</span>
+          <Link href="/">
+            <BrandLogo size="sm" />
           </Link>
         </div>
       </header>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -73,10 +74,7 @@ export default function LandingPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <Bot className="h-7 w-7 text-primary" />
-            <span className="text-xl font-bold">ПриёмAI</span>
-          </div>
+          <BrandLogo size="lg" />
           <nav className="hidden items-center gap-6 md:flex">
             <a href="#features" className="text-sm text-muted-foreground hover:text-foreground">
               Возможности
@@ -216,16 +214,13 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t py-8">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
-          <div className="flex items-center gap-2">
-            <Bot className="h-5 w-5 text-primary" />
-            <span className="font-semibold">ПриёмAI</span>
-          </div>
+          <BrandLogo size="sm" />
           <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             <Link href="/privacy" className="hover:text-foreground">Конфиденциальность</Link>
             <Link href="/terms" className="hover:text-foreground">Соглашение</Link>
             <Link href="/offer" className="hover:text-foreground">Оферта</Link>
           </nav>
-          <p className="text-sm text-muted-foreground">© 2026 ПриёмAI</p>
+          <p className="text-sm text-muted-foreground">© 2026 Приём<span className="text-red-500">AI</span></p>
         </div>
       </footer>
     </div>
