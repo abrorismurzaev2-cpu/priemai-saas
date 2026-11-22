@@ -5,7 +5,16 @@ import { Phone, Clock, FileText } from "lucide-react";
 import { DEMO_MODE, demoCalls } from "@/lib/demo-data";
 
 export default async function CallsPage() {
-  const calls = demoCalls;
+  const calls = demoCalls as Array<{
+    id: string;
+    caller_phone: string | null;
+    status: string;
+    duration_seconds: number;
+    summary: string | null;
+    sentiment: string | null;
+    created_at: string;
+  }>;
+
   return (
     <div className="space-y-6">
       {DEMO_MODE && (
@@ -31,26 +40,56 @@ export default async function CallsPage() {
                     <Phone className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <p className="font-medium">{call.caller_phone ? formatPhone(call.caller_phone) : "Неизвестный номер"}</p>
+                    <p className="font-medium">
+                      {call.caller_phone ? formatPhone(call.caller_phone) : "Неизвестный номер"}
+                    </p>
                     {call.summary && (
                       <p className="mt-0.5 flex items-start gap-1 text-sm text-muted-foreground">
-                        <FileText className="mt-0.5 h-3.5 w-3.5 shrink-0" />{call.summary}
+                        <FileText className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                        {call.summary}
                       </p>
                     )}
-                    <p className="mt-1 text-xs text-muted-foreground">{new Date(call.created_at).toLocaleString("ru-RU")}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {new Date(call.created_at).toLocaleString("ru-RU")}
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3" />{formatDuration(call.duration_seconds)}
+                    <Clock className="h-3 w-3" />
+                    {formatDuration(call.duration_seconds)}
                   </span>
                   {call.sentiment && (
-                    <Badge variant={call.sentiment === "positive" ? "success" : call.sentiment === "negative" ? "destructive" : "secondary"}>
-                      {call.sentiment === "positive" ? "Позитив" : call.sentiment === "negative" ? "Негатив" : "Нейтрал"}
+                    <Badge
+                      variant={
+                        call.sentiment === "positive"
+                          ? "success"
+                          : call.sentiment === "negative"
+                            ? "destructive"
+                            : "secondary"
+                      }
+                    >
+                      {call.sentiment === "positive"
+                        ? "Позитив"
+                        : call.sentiment === "negative"
+                          ? "Негатив"
+                          : "Нейтрал"}
                     </Badge>
                   )}
-                  <Badge variant={call.status === "ended" ? "success" : call.status === "failed" ? "destructive" : "secondary"}>
-                    {call.status === "ended" ? "Завершён" : call.status === "failed" ? "Ошибка" : call.status}
+                  <Badge
+                    variant={
+                      call.status === "ended"
+                        ? "success"
+                        : call.status === "failed"
+                          ? "destructive"
+                          : "secondary"
+                    }
+                  >
+                    {call.status === "ended"
+                      ? "Завершён"
+                      : call.status === "failed"
+                        ? "Ошибка"
+                        : call.status}
                   </Badge>
                 </div>
               </div>

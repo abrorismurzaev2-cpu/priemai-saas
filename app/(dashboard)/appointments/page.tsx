@@ -1,11 +1,19 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User } from "lucide-react";
+import { User } from "lucide-react";
 import { formatPhone } from "@/lib/utils";
 import { DEMO_MODE, demoAppointments } from "@/lib/demo-data";
 
 export default async function AppointmentsPage() {
-  const appointments = demoAppointments;
+  const appointments = demoAppointments as Array<{
+    id: string;
+    client_name: string | null;
+    client_phone: string | null;
+    starts_at: string;
+    status: string;
+    notes: string | null;
+  }>;
+
   return (
     <div className="space-y-6">
       {DEMO_MODE && (
@@ -32,16 +40,39 @@ export default async function AppointmentsPage() {
                   </div>
                   <div>
                     <p className="font-medium">{a.client_name || "Без имени"}</p>
-                    {a.client_phone && <p className="text-sm text-muted-foreground">{formatPhone(a.client_phone)}</p>}
-                    {a.notes && <p className="mt-1 text-sm text-muted-foreground">{a.notes}</p>}
+                    {a.client_phone && (
+                      <p className="text-sm text-muted-foreground">{formatPhone(a.client_phone)}</p>
+                    )}
+                    {a.notes && (
+                      <p className="mt-1 text-sm text-muted-foreground">{a.notes}</p>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-muted-foreground">
-                    {new Date(a.starts_at).toLocaleString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                    {new Date(a.starts_at).toLocaleString("ru-RU", {
+                      day: "numeric",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </span>
-                  <Badge variant={a.status === "confirmed" ? "success" : a.status === "cancelled" ? "destructive" : "secondary"}>
-                    {a.status === "confirmed" ? "Подтверждена" : a.status === "cancelled" ? "Отменена" : a.status === "completed" ? "Завершена" : "Ожидает"}
+                  <Badge
+                    variant={
+                      a.status === "confirmed"
+                        ? "success"
+                        : a.status === "cancelled"
+                          ? "destructive"
+                          : "secondary"
+                    }
+                  >
+                    {a.status === "confirmed"
+                      ? "Подтверждена"
+                      : a.status === "cancelled"
+                        ? "Отменена"
+                        : a.status === "completed"
+                          ? "Завершена"
+                          : "Ожидает"}
                   </Badge>
                 </div>
               </div>
